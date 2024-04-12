@@ -1,4 +1,9 @@
 let validation = document.getElementById('envoie');
+
+
+
+//Champs Prénom
+
 let prenom = document.getElementById("first");
 let errorPrenom = document.getElementById('erreurPrenom')
 let prenomValid= /^("^[a-z]+$");/
@@ -19,6 +24,61 @@ let prenomValid= /^("^[a-z]+$");/
          errorPrenom.textContent = "";
      }
  }
+
+
+ //Champs Nom
+
+ let nom = document.getElementById("last")
+let errorNom = document.getElementById('erreurNom')
+let nomValid= /^("^[a-z]+$");/
+
+function validate(event){
+    if (nom.value === ""){
+
+        errorNom.textContent = "Merci de renseigner votre nom";
+    } else if (nomValid.test(nom.value) == false){
+        errorNom.textContent = "Format du nom non valide";
+        } else {
+        errorNom.textContent = "";
+    }
+}
+
+//Email
+
+let email = document.getElementById("email")
+let errorMail = document.getElementById('errorEmail')
+
+function ValidateEmail(inputText)
+{
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(inputText.value.match(mailformat))
+    {
+        alert("adresse mail valide!");
+        document.form1.text1.focus();
+        return true;
+    }
+    else
+    {
+        alert("Vous avez entrez une adresse mail invalide!");
+        document.form1.text1.focus();
+        return false;
+    }
+}
+
+//Validation date de naissance
+
+if (birthdate.value === ""){
+    // event.preventDefault();
+    errorBirthdate.textContent = "Merci de renseigner votre date de naissance";
+    valid = false;
+} else if (birthdateValid.test(birthdate.value) == false) {
+    // event.preventDefault();
+    errorBirthdate.textContent = "jj/mm/aaaa";
+    valid = false;
+    } else {
+    errorBirthdate.textContent = "";
+}
+
 
 
 let listeBtnRadio = document.querySelectorAll("input[type=radio]")
