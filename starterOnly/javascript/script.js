@@ -67,6 +67,9 @@ function ValidateEmail(inputText)
 
 //Validation date de naissance
 
+let birthdate = document.getElementById("birthdate")
+let errorBirthdate = document.getElementById("errorBirthdate")
+
 if (birthdate.value === ""){
     // event.preventDefault();
     errorBirthdate.textContent = "Merci de renseigner votre date de naissance";
@@ -78,6 +81,10 @@ if (birthdate.value === ""){
     } else {
     errorBirthdate.textContent = "";
 }
+function ValidDate(day) {
+    var pattern = new RegExp(/^\d{2}-\d{2}-\d{4}$/);
+    return pattern.test(day);
+}
 
 
 
@@ -87,3 +94,5 @@ for (let i = 0; i < listeBtnRadio.length; i++ ) {
         console.log(listeBtnRadio[i].value)
     }
 }
+
+validation.addEventListener("click", valider);
