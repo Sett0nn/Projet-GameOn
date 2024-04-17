@@ -72,7 +72,7 @@ let errorBirthdate = document.getElementById("errorBirthdate")
 
 if (birthdate.value === ""){
     // event.preventDefault();
-    errorBirthdate.textContent = "Merci de renseigner votre date de naissance";
+    // errorBirthdate.textContent = "Merci de renseigner votre date de naissance";
     valid = false;
 } else if (birthdateValid.test(birthdate.value) == false) {
     // event.preventDefault();
@@ -95,4 +95,4 @@ for (let i = 0; i < listeBtnRadio.length; i++ ) {
     }
 }
 
-validation.addEventListener("click", valider);
+// validation.addEventListener("click", valider);
