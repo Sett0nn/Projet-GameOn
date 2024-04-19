@@ -5,10 +5,36 @@ const formInputs = document.querySelectorAll(".formData");
 const closeModalButton = document.querySelector(".close");
 const conditionsAcceptedCheckbox = document.querySelector("#checkbox1");
 const submitButton = document.querySelector(".btn-submit");
+const firstNameInput = document.querySelector("#first");
+const lastNameInput = document.querySelector("#last");
+const emailInput = document.querySelector("#email");
+const birthdateInput = document.querySelector("#birthdate");
+const quantityInput = document.querySelector("#quantity");
+const cityInput = document.querySelector('input[name="location"]');
 
-
+if (lastNameInput == null) throw new Error("No lastName inputs found");
+if (emailInput == null) throw new Error("No email inputs found");
+if (birthdateInput == null) throw new Error("No birthdate inputs found");
+if (quantityInput == null) throw new Error("No quantity inputs found");
+if (cityInput == null) throw new Error("No city inputs found");
+if (firstNameInput == null) throw new Error("No firstname inputs found");
 if (modalBackground == null) throw new Error("No modal background found");
 if (conditionsAcceptedCheckbox == null) throw new Error("No checkbox found");
+
+[firstNameInput,
+  lastNameInput,
+    emailInput,
+    birthdateInput,
+    quantityInput,].forEach ((input) => {
+
+      input.addEventListener("invalid",(event) => {
+        console.log("input is invalid")
+      });
+
+  // event.preventDefault();
+  // firstNameInput.classList.add("error");
+  console.log("first name is invalid")
+});
 conditionsAcceptedCheckbox.addEventListener("change", checkIfConditionAccepted);
   console.log("checkbox change");
 
