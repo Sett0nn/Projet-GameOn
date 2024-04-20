@@ -21,9 +21,11 @@ if (birthdateInput == null) throw new Error("No birthdate inputs found");
 if (quantityInput == null) throw new Error("No quantity inputs found");
 if (cityInput == null) throw new Error("No city inputs found");
 if (firstNameInput == null) throw new Error("No firstname inputs found");
-if (modalBackground == null) throw new Error("No modal background found");
+if (closeModalButton == null) throw new Error("No close button found");
 if (conditionsAcceptedCheckbox == null) throw new Error("No checkbox found");
 
+
+closeModalButton.addEventListener("click", closeModal);
 firstNameInput.addEventListener("invalid", flashErrorMessage);
 lastNameInput.addEventListener("invalid", flashErrorMessage);
 emailInput.addEventListener("invalid", flashErrorMessage);
@@ -62,7 +64,7 @@ conditionsAcceptedCheckbox.addEventListener("change", checkIfConditionAccepted);
   console.log("checkbox change");
 
 modalButtons.forEach((btn) => btn.addEventListener("click", launchModal));
-closeModalButton.addEventListener("click", closeModalButton)
+
 
 function checkIfConditionAccepted(event) {
   if (submitButton == null) throw new Error("No submit button found");
@@ -77,8 +79,13 @@ function checkIfConditionAccepted(event) {
 }
 
 function closeModal() {
-  if (closeModalButton == null ) throw new Error("no close button found")
-  modalBackground.classList.remove("active");
+    if (modalBackground == null) throw new Error("No modal background found");
+    // modalBackground.classList.remove("active");
+    modalBackground.classList.add("close");
+    console.log("closeModal:", closeModal);
+   if (closeModalButton == null ) throw new Error("no close button found");
+
+
 }
 
 
