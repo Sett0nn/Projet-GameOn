@@ -1,4 +1,7 @@
 // DOM Elements
+const qs=document.querySelector;
+const qsa = document.querySelectorAll;
+
 const modalBackground = document.querySelector(".bground");
 const modalButtons = document.querySelectorAll(".modal-btn");
 const formInputs = document.querySelectorAll(".formData");
@@ -21,20 +24,40 @@ if (firstNameInput == null) throw new Error("No firstname inputs found");
 if (modalBackground == null) throw new Error("No modal background found");
 if (conditionsAcceptedCheckbox == null) throw new Error("No checkbox found");
 
-[firstNameInput,
-  lastNameInput,
-    emailInput,
-    birthdateInput,
-    quantityInput,].forEach ((input) => {
+firstNameInput.addEventListener("invalid", flashErrorMessage);
+lastNameInput.addEventListener("invalid", flashErrorMessage);
+emailInput.addEventListener("invalid", flashErrorMessage);
+birthdateInput.addEventListener("invalid", flashErrorMessage);
+quantityInput.addEventListener("invalid", flashErrorMessage);
 
-      input.addEventListener("invalid",(event) => {
-        console.log("input is invalid")
-      });
+    function flashErrorMessage(event) {
+        const target = event.target;
+        const parent = target.parentElement;
 
-  // event.preventDefault();
-  // firstNameInput.classList.add("error");
-  console.log("first name is invalid")
-});
+
+        parent.setAttribute("data-error", "wrong input");
+        parent.setAttribute("data-error-visible", "true");
+        setTimeout(removeErrorMessages, 2000);
+    }
+
+    function removeErrorMessages() {
+        const errorMessages = document.querySelectorAll("[data-error]");
+        errorMessages.forEach((errorMessage) => {
+            errorMessage.removeAttribute("data-error");
+            errorMessage.removeAttribute("data-error-visible");
+        });
+    }
+
+//     .forEach ((input) => {
+//
+//       input.addEventListener("invalid",(event) => {
+//         console.log("input is invalid")
+//       });
+//
+//   // event.preventDefault();
+//   // firstNameInput.classList.add("error");
+//   console.log("first name is invalid")
+// });
 conditionsAcceptedCheckbox.addEventListener("change", checkIfConditionAccepted);
   console.log("checkbox change");
 
