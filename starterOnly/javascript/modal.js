@@ -32,11 +32,8 @@ if (closeModalButton == null) throw new Error("No close button found");
 
 
 
-// form.addEventListener("submit",(event) => {
-//     event.preventDefault();
-//     form.submit();
-//     console.log("submit");
-// });
+form.addEventListener("submit",handleSubmit);
+
 
 
 firstNameInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrez 2 caractère ou plus pour le champs du prénom")
@@ -93,6 +90,16 @@ function validateForm(event){
   console.log("checkbox change");
 modalButtons.forEach((btn) => btn.addEventListener("click", launchModal));
 closeModalButton.addEventListener("click",  closeModal);
+
+function handleSubmit() {
+    if (form == null) throw new Error("No form found");
+        if (form.checkValidity()){
+            closeModal();
+            alert("Merci ! Votre réservation a été reçu.");
+        }
+    }
+
+
 
 // function checkIfConditionAccepted(event) {
 //     if (submitButton == null) throw new Error("No submit button found");

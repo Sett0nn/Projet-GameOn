@@ -59,7 +59,9 @@
               action="index.html"
               method="get"
             >
-              <div class="formData">
+              <div data-error="Veuillez entrer un prénom d'au moins 2 caractères"
+                      class="formData">
+
                 <label>Prénom</label><br>
                 <input
                   class="text-control"
@@ -72,8 +74,9 @@
                   value="tommy"
                 /><br>
               </div>
-              <div
-                class="formData">
+              <div data-error="Veuillez entrer un nom d'au moins 2 caractères"
+                      class="formData">
+
                 <label>Nom</label>
                 <br><input
                       class="text-control"
@@ -86,8 +89,9 @@
                       value="pook"
               /><br>
               </div>
-              <div
+              <div data-error="Veuillez entrer un email valide"
                 class="formData">
+
                 <label
                   for="email">E-mail</label><br>
                 <input
@@ -102,8 +106,9 @@
                   value="a@b.com"
                 /><br>
               </div>
-              <div
+              <div data-error="Veuillez entrer une date de naissance valide"
                 class="formData">
+
                 <label for="birthdate"> Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -120,8 +125,10 @@
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required>
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
-              <div
+              <div data-error="Veuillez accepter les conditions d'utilisation"
                 class="formData">
+
+
                 <input
                   class="checkbox-input"
                   type="radio"
