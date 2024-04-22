@@ -58,7 +58,6 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate()"
             >
               <div class="formData">
                 <label>Prénom</label><br>
@@ -70,6 +69,7 @@
                   minlength="2"
                   required
                   placeholder="John"
+                  value="tommy"
                 /><br>
               </div>
               <div
@@ -83,6 +83,7 @@
                       minlength="2"
                       required
                       placeholder="Doe"
+                      value="pook"
               /><br>
               </div>
               <div
@@ -98,6 +99,7 @@
                   required
                   pattern=".+@.+\..+"
                   placeholder="john@doe.com"
+                  value="a@b.com"
                 /><br>
               </div>
               <div
@@ -109,6 +111,7 @@
                   id="birthdate"
                   name="birthdate"
                   required
+                  value="2019-07-22"
                 /><br>
               </div>
               <div
@@ -125,8 +128,8 @@
                   id="location1"
                   name="location"
                   value="New York"
-                  required
-                  checked="true"
+                  required="required"
+                  checked="checked"
                 />
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
@@ -200,6 +203,7 @@
                   type="checkbox"
                   id="checkbox1"
                   checked
+                  required="required"
                 />
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
@@ -228,6 +232,7 @@
         Copyright 2014 - 2022, GameOn Inc.
       </p>
     </footer>
+
 
     <script src="javascript/script.js"></script>
     <script src="javascript/modal.js"></script>

@@ -189,7 +189,7 @@ main {
 }
 
 .bground.active{
-  display: block;
+  display: none;
 }
 
 .content {

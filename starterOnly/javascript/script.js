@@ -7,6 +7,7 @@ let validation = document.getElementById('envoie');
 let prenom = document.getElementById("first");
 let errorPrenom = document.getElementById('erreurPrenom')
 let prenomValid= /^("^[a-z]+$");/
+let birthdateValid = document.getElementById('birthdateValid')
 
  function validate(event){
     console.log("enter in validate function with prenom.value=", prenom.value);
@@ -70,17 +71,7 @@ function ValidateEmail(inputText)
 let birthdate = document.getElementById("birthdate")
 let errorBirthdate = document.getElementById("errorBirthdate")
 
-if (birthdate.value === ""){
-    // event.preventDefault();
-    // errorBirthdate.textContent = "Merci de renseigner votre date de naissance";
-    valid = false;
-} else if (birthdateValid.test(birthdate.value) == false) {
-    // event.preventDefault();
-    errorBirthdate.textContent = "jj/mm/aaaa";
-    valid = false;
-    } else {
-    errorBirthdate.textContent = "";
-}
+
 function ValidDate(day) {
     var pattern = new RegExp(/^\d{2}-\d{2}-\d{4}$/);
     return pattern.test(day);
