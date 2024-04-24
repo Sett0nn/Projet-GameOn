@@ -1,7 +1,9 @@
 // DOM Elements
-const qs=document.querySelector;
+const qs= document.querySelector;
 const qsa = document.querySelectorAll;
 
+
+// élément repris du html
 const modalBackground = document.querySelector(".bground");
 const modalButtons = document.querySelectorAll(".modal-btn");
 const formInputs = document.querySelectorAll(".formData");
@@ -18,7 +20,7 @@ const form = document.querySelector("form");
 const location1 = document.querySelector("#location1");
 
 
-
+// En cas de réponse non valide, une condition d'erreur est faitre pour y répondre
 if (form == null) throw new Error("No form found");
 if (location1 == null) throw new Error("No location1 found");
 if (lastNameInput == null) throw new Error("No lastName inputs found");
@@ -35,7 +37,7 @@ if (closeModalButton == null) throw new Error("No close button found");
 form.addEventListener("submit",handleSubmit);
 
 
-
+// Si addEventListener invalid appelle de la fonction flashErrorMessage
 firstNameInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrez 2 caractère ou plus pour le champs du prénom")
 );
 lastNameInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrez 2 caractère ou plus pour le champs du nom.")
@@ -60,6 +62,8 @@ function validateForm(event){
     return false;
 }
 
+
+//Call du parent, data error visible  true , au bout de 10 seconde retirer
     function flashErrorMessage(event, message) {
         const target = event.target;
         const parent = target.parentElement;
@@ -67,6 +71,7 @@ function validateForm(event){
         parent.setAttribute("data-error-visible", "true");
         setTimeout(removeErrorMessages, 10000);
     }
+
 
     function removeErrorMessages() {
         const errorMessages = document.querySelectorAll("[data-error]");
@@ -76,18 +81,10 @@ function validateForm(event){
         });
     }
 
-//     .forEach ((input) => {
-//
-//       input.addEventListener("invalid",(event) => {
-//         console.log("input is invalid")
-//       });
-//
-//   // event.preventDefault();
-//   // firstNameInput.classList.add("error");
-//   console.log("first name is invalid")
-// });
-// conditionsAcceptedCheckbox.addEventListener("change", checkIfConditionAccepted);
+
   console.log("checkbox change");
+
+//au bouton "je m'inscrit" launchModal est appelé
 modalButtons.forEach((btn) => btn.addEventListener("click", launchModal));
 closeModalButton.addEventListener("click",  closeModal);
 
@@ -99,30 +96,20 @@ function handleSubmit() {
         }
     }
 
+    //launchModal rajoute une classe active sur modalBackground, elle va mettre une display "block"
+function launchModal() {
+    if (modalBackground == null) throw new Error("No modal background found")
+    modalBackground.classList.add("active");
+    modalBackground.style.display = ("block");
+}
 
 
-// function checkIfConditionAccepted(event) {
-//     if (submitButton == null) throw new Error("No submit button found");
-//    const target= event.target;
-//    console.log("target", target);
-
-    // const isChecked = conditionsAcceptedCheckbox.checked;
-    // console.log("isChecked", isChecked);
-    // if (!isChecked) {
-
-    //   submitButton.setAttribute("disabled", "true");
-    // } else {
-    //   submitButton.setAttribute("disabled")
-
-    // if (isChecked) return submitButton.removeAttribute("disabled");
-    // submitButton.setAttribute("disabled", "true")
-    // flashErrorMessage(event, "Vous devez acceptez les conditions d'utilisation. ")
-
+// closeModale retire le active
     function closeModal() {
         if (modalBackground == null) throw new Error("No modal background found");
-        // modalBackground.classList.remove("active");
+        modalBackground.classList.remove("active");
         modalBackground.classList.add("close");
-        modalBackground.classList.add("active");
+       
         console.log("closeModal:", closeModal);
         if (closeModalButton == null) throw new Error("no close button found");
 
@@ -130,11 +117,7 @@ function handleSubmit() {
     }
 
 
-    function launchModal() {
-        if (modalBackground == null) throw new Error("No modal background found")
-        modalBackground.classList.add("active");
-        modalBackground.style.display = ("block");
-    }
+
 
     function editNav() {
         const topNavbar = document.getElementById("myTopnav");
