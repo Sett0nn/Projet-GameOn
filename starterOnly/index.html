@@ -5,6 +5,7 @@
     <title>Reservation</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="formConfirmation.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet"/>
 
@@ -50,9 +51,17 @@
         </button>
       </div>
 
+      <!--modal Form -->
       <div class="bground">
         <div class="content">
           <span class="close"></span>
+
+          <!--modal Confirmation -->
+          <div class="formConfirmation">
+            <span> </span>
+            <input class="btn-submit-confirm" type="submit" value="Fermer"/>
+          </div>
+          <!--fin de modal Confirmation -->
           <div class="modal-body">
             <form
               name="reserve"
@@ -96,12 +105,12 @@
                   for="email">E-mail</label><br>
                 <input
                   class="text-control"
-                  type="email"
+                  type="text"
                   id="email"
                   name="email"
                   minlength="2"
                   required
-                  pattern=".+@.+\..+"
+
                   placeholder="john@doe.com"
 
                 /><br>
@@ -110,7 +119,7 @@
                 class="formData">
 
                 <label for="birthdate"> Date de naissance</label><br>
-                <input
+                <input onsubmit="return validateBirthdate()"
                   class="text-control"
                   type="date"
                   id="birthdate"
@@ -234,15 +243,15 @@
         </div>
       </div>
     </main>
+    </div>
     <footer>
       <p class="copyrights">
         Copyright 2014 - 2022, GameOn Inc.
       </p>
     </footer>
 
-
-    <script src="javascript/script.js"></script>
-    <script src="javascript/modal.js"></script>
+    <script src="javascript/script.js" type="module"></script>
+    <script src="javascript/modal.js" type="module"></script>
   </body>
 
 </html>

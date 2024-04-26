@@ -1,13 +1,13 @@
 let validation = document.getElementById('envoie');
 
-
+// validation form
 
 //Champs Prénom
 
 let prenom = document.getElementById("first");
 let errorPrenom = document.getElementById('erreurPrenom')
 let prenomValid= /^("^[a-z]+$");/
-let birthdateValid = document.getElementById('birthdateValid')
+
 
  function validate(event){
     console.log("enter in validate function with prenom.value=", prenom.value);
@@ -68,22 +68,21 @@ function ValidateEmail(inputText)
 
 //Validation date de naissance
 
-let birthdate = document.getElementById("birthdate")
-let errorBirthdate = document.getElementById("errorBirthdate")
 
 
-function ValidDate(day) {
-    var pattern = new RegExp(/^\d{2}-\d{2}-\d{4}$/);
-    return pattern.test(day);
+        function ValidDate(day) {
+            var pattern = new RegExp(/^\d{2}-\d{2}-\d{4}$/);
+            return pattern.test(day);
+}
+
+    let listeBtnRadio = document.querySelectorAll("input[type=radio]")
+    for (let i = 0; i < listeBtnRadio.length; i++) {
+        if (listeBtnRadio[i].checked) {
+            console.log(listeBtnRadio[i].value)
+        }
 }
 
 
 
-let listeBtnRadio = document.querySelectorAll("input[type=radio]")
-for (let i = 0; i < listeBtnRadio.length; i++ ) {
-    if (listeBtnRadio[i].checked) {
-        console.log(listeBtnRadio[i].value)
-    }
-}
 
 // validation.addEventListener("click", valider);

@@ -20,7 +20,7 @@ const form = document.querySelector("form");
 const location1 = document.querySelector("#location1");
 
 
-// En cas de réponse non valide, une condition d'erreur est faitre pour y répondre
+// En cas de réponse non valide, une condition d'erreur est faite pour y répondre
 if (form == null) throw new Error("No form found");
 if (location1 == null) throw new Error("No location1 found");
 if (lastNameInput == null) throw new Error("No lastName inputs found");
@@ -37,7 +37,7 @@ if (closeModalButton == null) throw new Error("No close button found");
 form.addEventListener("submit",handleSubmit);
 
 
-// Si addEventListener invalid appelle de la fonction flashErrorMessage
+// Si addEventListener invalid appel de la fonction flashErrorMessage
 firstNameInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrez 2 caractère ou plus pour le champs du prénom")
 );
 lastNameInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrez 2 caractère ou plus pour le champs du nom.")
@@ -109,14 +109,12 @@ function launchModal() {
         if (modalBackground == null) throw new Error("No modal background found");
         modalBackground.classList.remove("active");
         modalBackground.classList.add("close");
-       
+
         console.log("closeModal:", closeModal);
         if (closeModalButton == null) throw new Error("no close button found");
 
 
     }
-
-
 
 
     function editNav() {
@@ -127,3 +125,56 @@ function launchModal() {
 
 
 
+function validateBirthdate(input, errorElement) {
+    if (input.value === ""){
+        errorElement.style.display = "block";
+        input.classList.add("field-error");
+        return false;
+    } else {
+        const birthdate = new Date(input.value);
+        const currentDate = new Date().toDateString();
+        const  age = currentDate.getFullYear() - birthdate.getFullYear();
+        if (age > 100 || age < 12) {
+            errorElement.style.display = "block";
+            input.classList.add("field-error");
+            return false;
+        } else {
+            errorElement.style.display = "none";
+            input.classList.remove("field-error");
+            return true;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+const btnSubmit = document.querySelector(".btn-submit");
+const modalConfirmation = document.querySelector(".formConfirmation");
+const spanValidModal = document.querySelector(".formConfirmation > span");
+const btnSubmitConfirm = document.querySelector(".btn-submit-confirm");
+
+/**
+ * Fonction pour ouvrir la modale de confirmation d'inscription
+ */
+function launchModalConfirmation() {
+    modalConfirmation.style.display = "block";
+    spanValidModal.innerHTML = "Merci pour <br> votre inscription";
+}
+
+btnSubmit.addEventListener("click", launchModalConfirmation);
+
+/**
+ * Fonction pour fermer la modale de confirmation d'inscription
+ */
+function closeModalConfirmation() {
+    modalbg.style.display = "none";
+    window.location.reload();
+}
+
+btnSubmitConfirm.addEventListener("click", closeModalConfirmation);
