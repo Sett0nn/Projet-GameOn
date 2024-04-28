@@ -1,12 +1,7 @@
-// DOM Elements
-const qs= document.querySelector;
-const qsa = document.querySelectorAll;
-
 
 // élément repris du html
 const modalBackground = document.querySelector(".bground");
 const modalButtons = document.querySelectorAll(".modal-btn");
-const formInputs = document.querySelectorAll(".formData");
 const closeModalButton = document.querySelector(".close");
 const conditionsAcceptedCheckbox = document.querySelector("#checkbox1");
 const submitButton = document.querySelector(".btn-submit");
@@ -20,6 +15,8 @@ const form = document.querySelector("form");
 const location1 = document.querySelector("#location1");
 
 
+
+
 // En cas de réponse non valide, une condition d'erreur est faite pour y répondre
 if (form == null) throw new Error("No form found");
 if (location1 == null) throw new Error("No location1 found");
@@ -30,7 +27,7 @@ if (quantityInput == null) throw new Error("No quantity inputs found");
 if (cityInput == null) throw new Error("No city inputs found");
 if (firstNameInput == null) throw new Error("No firstname inputs found");
 if (closeModalButton == null) throw new Error("No close button found");
-// if (conditionsAcceptedCheckbox == null) throw new Error("No checkbox found");
+if (conditionsAcceptedCheckbox == null) throw new Error("No checkbox found");
 
 
 
@@ -67,7 +64,6 @@ function validateForm(event){
     function flashErrorMessage(event, message) {
         const target = event.target;
         const parent = target.parentElement;
-        parent.setAttribute("data-error", message);
         parent.setAttribute("data-error-visible", "true");
         setTimeout(removeErrorMessages, 10000);
     }
@@ -76,7 +72,6 @@ function validateForm(event){
     function removeErrorMessages() {
         const errorMessages = document.querySelectorAll("[data-error]");
         errorMessages.forEach((errorMessage) => {
-            errorMessage.removeAttribute("data-error");
             errorMessage.removeAttribute("data-error-visible");
         });
     }
@@ -92,9 +87,29 @@ function handleSubmit() {
     if (form == null) throw new Error("No form found");
         if (form.checkValidity()){
             closeModal();
-            alert("Merci ! Votre réservation a été reçu.");
+            // alert("Merci ! Votre réservation a été reçu.");
         }
     }
+
+/**
+ * Fonction pour ouvrir la modale de confirmation d'inscription
+ */
+function launchModalConfirmation() {
+    modalConfirmation.style.display = "block";
+    spanValidModal.innerHTML = "Merci pour <br> votre inscription";
+}
+
+btnSubmit.addEventListener("click", launchModalConfirmation);
+
+
+/**
+ * Fonction pour fermer la modale de confirmation d'inscription
+ */
+function closeModalConfirmation() {
+    modalbg.style.display = "none";
+    window.location.reload();
+}
+btnSubmitConfirm.addEventListener("click", closeModalConfirmation);
 
     //launchModal rajoute une classe active sur modalBackground, elle va mettre une display "block"
 function launchModal() {
@@ -111,7 +126,6 @@ function launchModal() {
         modalBackground.classList.add("close");
 
         console.log("closeModal:", closeModal);
-        if (closeModalButton == null) throw new Error("no close button found");
 
 
     }
@@ -125,26 +139,6 @@ function launchModal() {
 
 
 
-function validateBirthdate(input, errorElement) {
-    if (input.value === ""){
-        errorElement.style.display = "block";
-        input.classList.add("field-error");
-        return false;
-    } else {
-        const birthdate = new Date(input.value);
-        const currentDate = new Date().toDateString();
-        const  age = currentDate.getFullYear() - birthdate.getFullYear();
-        if (age > 100 || age < 12) {
-            errorElement.style.display = "block";
-            input.classList.add("field-error");
-            return false;
-        } else {
-            errorElement.style.display = "none";
-            input.classList.remove("field-error");
-            return true;
-        }
-    }
-}
 
 
 
@@ -154,27 +148,5 @@ function validateBirthdate(input, errorElement) {
 
 
 
-const btnSubmit = document.querySelector(".btn-submit");
-const modalConfirmation = document.querySelector(".formConfirmation");
-const spanValidModal = document.querySelector(".formConfirmation > span");
-const btnSubmitConfirm = document.querySelector(".btn-submit-confirm");
 
-/**
- * Fonction pour ouvrir la modale de confirmation d'inscription
- */
-function launchModalConfirmation() {
-    modalConfirmation.style.display = "block";
-    spanValidModal.innerHTML = "Merci pour <br> votre inscription";
-}
 
-btnSubmit.addEventListener("click", launchModalConfirmation);
-
-/**
- * Fonction pour fermer la modale de confirmation d'inscription
- */
-function closeModalConfirmation() {
-    modalbg.style.display = "none";
-    window.location.reload();
-}
-
-btnSubmitConfirm.addEventListener("click", closeModalConfirmation);
