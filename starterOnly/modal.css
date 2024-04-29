@@ -603,6 +603,45 @@ a.icon::before {
 }
 
 
+
+.postRegisterContent {
+  max-width: 536px;
+  max-height: 850px;
+  height: 83.1%;
+}
+
+.postRegisterContent-text {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 51px;
+  letter-spacing: 0em;
+  text-align: center;
+  padding-top: 207px;
+  padding-bottom: 266px;
+}
+
+.btn-fermer {
+  position: relative;
+  width: 131px;
+  height: 31px;
+  display: block;
+  margin: 0 auto;
+  background: #fe142f;
+  border-radius: 7px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0px;
+  padding: 0;
+}
+
+.postRegisterContent {
+  padding: 0;
+}
+
+
 @media (max-width: 1100px) {
   .hero-content {
     min-width: unset;

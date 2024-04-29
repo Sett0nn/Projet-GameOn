@@ -1,152 +1,206 @@
 
-// élément repris du html
-const modalBackground = document.querySelector(".bground");
-const modalButtons = document.querySelectorAll(".modal-btn");
-const closeModalButton = document.querySelector(".close");
-const conditionsAcceptedCheckbox = document.querySelector("#checkbox1");
-const submitButton = document.querySelector(".btn-submit");
-const firstNameInput = document.querySelector("#first");
-const lastNameInput = document.querySelector("#last");
-const emailInput = document.querySelector("#email");
-const birthdateInput = document.querySelector("#birthdate");
-const quantityInput = document.querySelector("#quantity");
-const cityInput = document.querySelector('input[name="location"]');
-const form = document.querySelector("form");
-const location1 = document.querySelector("#location1");
 
+// MODALS DOM Elements
+const modalbg = document.querySelector(".bground");
+const modalBtn = document.querySelectorAll(".modal-btn");
+const closeModal = document.querySelectorAll(".close");
+const content = document.querySelector(".content");
+const testmodal = document.querySelector(".postRegisterModal");
+const testm = document.querySelectorAll(".testm");
+const testcontent = document.querySelector(".postRegisterContent");
+const testclose = document.querySelector(".postRegisterClose");
+const btnfermer = document.querySelector(".btn-fermer");
 
+// FORM VALIDATION PROCESS
 
+const firstNameInput = document.getElementById("first");
+const firstNameError = document.getElementById("firstNameError");
+const lastNameInput = document.getElementById("last");
+const lastNameError = document.getElementById("lastNameError");
+const emailInput = document.getElementById("email");
+const emailError = document.getElementById("emailError");
+const birthdateInput = document.getElementById("birthdate");
+const birthdateError = document.getElementById("birthdateError");
+const quantityInput = document.getElementById("quantity");
+const quantityError = document.getElementById("quantityError");
+const locationInputs = document.querySelectorAll('input[name="location"]');
+const locationError = document.getElementById("locationError");
 
-// En cas de réponse non valide, une condition d'erreur est faite pour y répondre
-if (form == null) throw new Error("No form found");
-if (location1 == null) throw new Error("No location1 found");
-if (lastNameInput == null) throw new Error("No lastName inputs found");
-if (emailInput == null) throw new Error("No email inputs found");
-if (birthdateInput == null) throw new Error("No birthdate inputs found");
-if (quantityInput == null) throw new Error("No quantity inputs found");
-if (cityInput == null) throw new Error("No city inputs found");
-if (firstNameInput == null) throw new Error("No firstname inputs found");
-if (closeModalButton == null) throw new Error("No close button found");
-if (conditionsAcceptedCheckbox == null) throw new Error("No checkbox found");
-
-
-
-form.addEventListener("submit",handleSubmit);
-
-
-// Si addEventListener invalid appel de la fonction flashErrorMessage
-firstNameInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrez 2 caractère ou plus pour le champs du prénom")
-);
-lastNameInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrez 2 caractère ou plus pour le champs du nom.")
-);
-emailInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrer un email valide.")
-);
-birthdateInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrer votre date de naissance"));
-quantityInput.addEventListener("invalid", (event) => flashErrorMessage(event, "veuillez entrer votre nombre de tournois participé"));
-
-location1.addEventListener("invalid", (event) => {
-    flashErrorMessage(event, "vous devez choisir une option");
+//EVENTS LISTENERS ON CHANGE
+firstNameInput.addEventListener("input", function() {
+    validateName(firstNameInput, firstNameError);
 });
-conditionsAcceptedCheckbox.addEventListener("invalid", (event)=>{
-    console.log("condition are not accepted");
-    flashErrorMessage(event, "Vous devez accepter les conditions d'utilisation.")
+lastNameInput.addEventListener("input", function() {
+    validateName(lastNameInput, lastNameError);
+});
+emailInput.addEventListener("input", function() {
+    validateEmail(emailInput, emailError);
+});
+birthdateInput.addEventListener("input", function() {
+    validateBirthdate(birthdateInput, birthdateError);
+});
+quantityInput.addEventListener("input", function() {
+    validateQuantity(quantityInput, quantityError);
+});
+locationInputs.forEach((input) => {
+    input.addEventListener("input", function() {
+        validateLocation(locationInputs, locationError);
+    });
 });
 
+//  -------------- REGISTRATION MODAL --------------
 
-function validateForm(event){
-    console.log("event",event)
-    event.preventDefault();
-    return false;
+// event listeners
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+closeModal.forEach(function (element) {
+    element.addEventListener("click", handleCloseModal);
+});
+
+// launch modal form
+function launchModal() {
+    modalbg.style.display = "block";
+    content.classList.remove("hide-modal");
+}
+
+// close modal form
+function handleCloseModal() {
+    content.classList.add("hide-modal");
+// Listen for the animation end event to actually hide the modal after the animation completes
+    content.addEventListener("animationend", function (event) {
+        if (event.animationName === "modalclose") {
+            modalbg.style.display = "none";
+            content.classList.remove("hide-modal");
+        }
+    });
 }
 
 
-//Call du parent, data error visible  true , au bout de 10 seconde retirer
-    function flashErrorMessage(event, message) {
-        const target = event.target;
-        const parent = target.parentElement;
-        parent.setAttribute("data-error-visible", "true");
-        setTimeout(removeErrorMessages, 10000);
+
+//  -------------- POST REGISTRATION MODAL --------------
+
+// event listeners post registration modal
+testm.forEach((btn) => btn.addEventListener("click", launchM));
+testclose.addEventListener("click", handleM); // Use addEventListener directly
+btnfermer.addEventListener("click", handleM);
+
+// launch post registration modal
+function launchM() {
+    testmodal.style.display = "block";
+    testcontent.classList.remove("hide-modal");
+}
+
+// close  post registration modal
+function handleM() {
+    testcontent.classList.add("hide-modal");
+    setTimeout(function () {
+        testmodal.style.display = "none";
+    }, 222); // timeout for a smoother effect
+}
+
+
+
+// FORM VALIDATION 
+
+function validateName(input, errorElement) {
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ]{2,}$/;
+    if (!regex.test(input.value)) {
+        errorElement.style.display = "block";
+        input.classList.add("field-error");
+        return false;
+    } else {
+        errorElement.style.display = "none";
+        input.classList.remove("field-error");
+        return true;
     }
+}
 
-
-    function removeErrorMessages() {
-        const errorMessages = document.querySelectorAll("[data-error]");
-        errorMessages.forEach((errorMessage) => {
-            errorMessage.removeAttribute("data-error-visible");
-        });
+function validateEmail(input, errorElement) {
+    const emailRegex = /^[A-Za-z]{1,}[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+    if (!emailRegex.test(input.value)) {
+        errorElement.style.display = "block";
+        input.classList.add("field-error");
+        return false;
+    } else {
+        errorElement.style.display = "none";
+        input.classList.remove("field-error");
+        return true;
     }
+}
 
-
-  console.log("checkbox change");
-
-//au bouton "je m'inscrit" launchModal est appelé
-modalButtons.forEach((btn) => btn.addEventListener("click", launchModal));
-closeModalButton.addEventListener("click",  closeModal);
-
-function handleSubmit() {
-    if (form == null) throw new Error("No form found");
-        if (form.checkValidity()){
-            closeModal();
-            // alert("Merci ! Votre réservation a été reçu.");
+function validateBirthdate(input, errorElement) {
+    if (input.value === "") {
+        errorElement.style.display = "block";
+        input.classList.add("field-error");
+        return false;
+    } else {
+        const birthdate = new Date(input.value);
+        const currentDate = new Date();
+        const age = currentDate.getFullYear() - birthdate.getFullYear();
+        if (age > 100 || age < 12) {
+            errorElement.style.display = "block";
+            input.classList.add("field-error");
+            return false;
+        } else {
+            errorElement.style.display = "none";
+            input.classList.remove("field-error");
+            return true;
         }
     }
-
-/**
- * Fonction pour ouvrir la modale de confirmation d'inscription
- */
-function launchModalConfirmation() {
-    modalConfirmation.style.display = "block";
-    spanValidModal.innerHTML = "Merci pour <br> votre inscription";
-}
-
-btnSubmit.addEventListener("click", launchModalConfirmation);
-
-
-/**
- * Fonction pour fermer la modale de confirmation d'inscription
- */
-function closeModalConfirmation() {
-    modalbg.style.display = "none";
-    window.location.reload();
-}
-btnSubmitConfirm.addEventListener("click", closeModalConfirmation);
-
-    //launchModal rajoute une classe active sur modalBackground, elle va mettre une display "block"
-function launchModal() {
-    if (modalBackground == null) throw new Error("No modal background found")
-    modalBackground.classList.add("active");
-    modalBackground.style.display = ("block");
 }
 
 
-// closeModale retire le active
-    function closeModal() {
-        if (modalBackground == null) throw new Error("No modal background found");
-        modalBackground.classList.remove("active");
-        modalBackground.classList.add("close");
-
-        console.log("closeModal:", closeModal);
-
-
+function validateQuantity(input, errorElement) {
+    if (input.value === "" || isNaN(input.value)) {
+        errorElement.style.display = "block";
+        input.classList.add("field-error");
+        return false;
+    } else {
+        errorElement.style.display = "none";
+        input.classList.remove("field-error");
+        return true;
     }
+}
 
-
-    function editNav() {
-        const topNavbar = document.getElementById("myTopnav");
-        if (topNavbar == null) throw new Error("No topnav found");
-        topNavbar.classList.toggle("responsive");
+function validateLocation(locationInputs, errorElement) {
+    let isLocationSelected = false;
+    locationInputs.forEach((input) => {
+        if (input.checked) {
+            isLocationSelected = true;
+        }
+    });
+    if (!isLocationSelected) {
+        errorElement.style.display = "block";
+        errorElement.classList.add("field-error");
+        return false;
+    } else {
+        errorElement.style.display = "none";
+        errorElement.classList.remove("field-error");
+        return true;
     }
+}
 
+function validate() {
+    const firstNameValid = validateName(firstNameInput, firstNameError);
+    const lastNameValid = validateName(lastNameInput, lastNameError);
+    const emailValid = validateEmail(emailInput, emailError);
+    const birthdateValid = validateBirthdate(birthdateInput, birthdateError);
+    const quantityValid = validateQuantity(quantityInput, quantityError);
+    const locationValid = validateLocation(locationInputs, locationError);
 
+    const isValid =
+        firstNameValid &&
+        lastNameValid &&
+        emailValid &&
+        birthdateValid &&
+        quantityValid &&
+        locationValid;
 
-
-
-
-
-
-
-
-
-
-
-
+    if (isValid) {
+        launchM();
+        event.preventDefault();
+        handleCloseModal();
+        return true;
+    } else {
+        return false;
+    }
+}
