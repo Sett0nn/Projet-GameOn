@@ -1,6 +1,7 @@
 
 
 // MODALS DOM Elements
+// Selection des classes dans html
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const closeModal = document.querySelectorAll(".close");
@@ -75,31 +76,7 @@ function handleCloseModal() {
 }
 
 
-
-//  -------------- POST REGISTRATION MODAL --------------
-
-// event listeners post registration modal
-testm.forEach((btn) => btn.addEventListener("click", launchM));
-testclose.addEventListener("click", handleM); // Use addEventListener directly
-btnfermer.addEventListener("click", handleM);
-
-// launch post registration modal
-function launchM() {
-    testmodal.style.display = "block";
-    testcontent.classList.remove("hide-modal");
-}
-
-// close  post registration modal
-function handleM() {
-    testcontent.classList.add("hide-modal");
-    setTimeout(function () {
-        testmodal.style.display = "none";
-    }, 222); // timeout for a smoother effect
-}
-
-
-
-// FORM VALIDATION 
+// FORM VALIDATION
 
 function validateName(input, errorElement) {
     const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ]{2,}$/;
@@ -149,6 +126,17 @@ function validateBirthdate(input, errorElement) {
 }
 
 
+function validateCheckbox(input, errorElement) {
+    if (!input.checked) {
+        errorElement.style.display = "block";
+        return false;
+    } else {
+        errorElement.style.display = "none";
+        return true;
+    }
+}
+
+
 function validateQuantity(input, errorElement) {
     if (input.value === "" || isNaN(input.value)) {
         errorElement.style.display = "block";
@@ -178,6 +166,33 @@ function validateLocation(locationInputs, errorElement) {
         return true;
     }
 }
+
+
+
+//  -------------- POST REGISTRATION MODAL --------------
+// confirmation de l'inscription
+// event listeners post registration modal
+testm.forEach((btn) => btn.addEventListener("click", launchM));
+testclose.addEventListener("click", handleM); // Use addEventListener directly
+btnfermer.addEventListener("click", handleM);
+
+// launch post registration modal
+function launchM() {
+    testmodal.style.display = "block";
+    testcontent.classList.remove("hide-modal");
+}
+
+// close  post registration modal
+function handleM() {
+    testcontent.classList.add("hide-modal");
+    setTimeout(function () {
+        testmodal.style.display = "none";
+    }, 222); // timeout for a smoother effect
+}
+
+//0.22 seconde
+
+
 
 function validate() {
     const firstNameValid = validateName(firstNameInput, firstNameError);
